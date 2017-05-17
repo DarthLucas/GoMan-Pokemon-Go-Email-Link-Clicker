@@ -39,7 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto">
-      <HintPath>..\GoMan\bin\Release\BouncyCastle.Crypto.dll</HintPath>
+      <HintPath>..\packages\BouncyCastle.1.8.1\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
     <Reference Include="GoMan">
       <HintPath>..\GoMan\bin\Release\GoMan.dll</HintPath>
@@ -49,10 +49,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="MailKit">
-      <HintPath>..\GoMan\bin\Release\MailKit.dll</HintPath>
+      <HintPath>..\packages\MailKit.1.10.2\lib\net451\MailKit.dll</HintPath>
     </Reference>
     <Reference Include="MimeKit">
-      <HintPath>..\GoMan\bin\Release\MimeKit.dll</HintPath>
+      <HintPath>..\packages\MimeKit.1.10.1\lib\net451\MimeKit.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>

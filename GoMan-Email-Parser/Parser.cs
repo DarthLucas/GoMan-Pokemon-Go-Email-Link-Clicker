@@ -36,6 +36,7 @@ namespace Email_Url_Parser
                 _worker = new EmailUrlParser(Settings);
                 _worker.ParsedLinkEvent += WorkerOnParsedLinkEvent;
                 _worker.Client.Disconnected += OnClientDisconnectedClient;
+                _worker.Client.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
             }
 
             if (!_worker.Client.IsConnected || !_worker.Client.IsAuthenticated)

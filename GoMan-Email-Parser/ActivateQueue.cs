@@ -91,8 +91,11 @@ namespace Email_Url_Parser
                 parsedUrl.Verified = false;
                 parsedUrl.AddLog(LoggerTypes.Exception, "Url Clicked!", e);
             }
+            finally
+            {
+                callback(parsedUrl);
+            }
 
-            callback(parsedUrl);
         }
     }
 }
