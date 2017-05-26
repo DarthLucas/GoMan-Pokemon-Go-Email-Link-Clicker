@@ -39,6 +39,7 @@ namespace Email_Url_Parser
                 _worker.Client.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
             }
 
+
             if (!_worker.Client.IsConnected || !_worker.Client.IsAuthenticated)
             {
                 await ReconnectClient().ConfigureAwait(false);
@@ -65,14 +66,18 @@ namespace Email_Url_Parser
 
         private async Task ReconnectClient()
         {
-            ImapEvent?.Invoke(this, "Connecting");
-            await _worker.Client.ConnectAsync(_worker.EmailUrlParserConfiguration.GetUri()).ConfigureAwait(false);
-            ImapEvent?.Invoke(this, "Connected");
+            if (!_worker.Client.IsConnected)
+            {
+                ImapEvent?.Invoke(this, "Connecting");
+                await _worker.Client.ConnectAsync(_worker.EmailUrlParserConfiguration.GetUri());
+                ImapEvent?.Invoke(this, "Connected");
+            }
+
             _worker.Client.AuthenticationMechanisms.Remove("XOAUTH2");
             try
             {
                 ImapEvent?.Invoke(this, "Authenticating");
-                _worker.Client.Authenticate(_worker.EmailUrlParserConfiguration.GetCredential());
+                await _worker.Client.AuthenticateAsync(_worker.EmailUrlParserConfiguration.GetCredential());
                 ImapEvent?.Invoke(this, "Authenticated");
             }
             catch
@@ -102,13 +107,19 @@ namespace Email_Url_Parser
                 ActivateQueue.AddToQueue(parsedUrl, Callback);
                 ProxyHandlerSingleton.Instance.IncreaseFailCounter(parsedUrl.Proxy);
             }
-            else if (_worker.Client.IsConnected && _worker.Client.IsAuthenticated)
+            else 
             {
                 try
                 {
                     try
                     {
-                        await _worker.Client.Inbox.OpenAsync(FolderAccess.ReadWrite);
+                        if (!_worker.Client.IsConnected)
+                            await _worker.Client.ConnectAsync(_worker.EmailUrlParserConfiguration.GetUri())
+                                .ConfigureAwait(false);
+                        if (!_worker.Client.IsAuthenticated)
+                            await _worker.Client.AuthenticateAsync(_worker.EmailUrlParserConfiguration.GetCredential());
+                        if (!_worker.Client.Inbox.IsOpen)
+                            await _worker.Client.Inbox.OpenAsync(FolderAccess.ReadWrite);
                     }
                     catch (Exception e)
                     {

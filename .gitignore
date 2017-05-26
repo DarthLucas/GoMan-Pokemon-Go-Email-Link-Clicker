@@ -298,3 +298,21 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+/GoMan/bin/Release
+/GoMan-Email-Parser/bin/Release/SparkleLibrary.dll
+/GoMan-Email-Parser/bin/Release/SavedProxies.json
+/GoMan-Email-Parser/bin/Release/SavedAccounts.json
+/GoMan-Email-Parser/bin/Release/Pokemon Activation Link Clicker.vshost.exe.manifest
+/GoMan-Email-Parser/bin/Release/Pokemon Activation Link Clicker.vshost.exe.config
+/GoMan-Email-Parser/bin/Release/Pokemon Activation Link Clicker.vshost.exe
+/GoMan-Email-Parser/bin/Release/Pokemon Activation Link Clicker.exe.config
+/GoMan-Email-Parser/bin/Release/ObjectListView.dll
+/GoMan-Email-Parser/bin/Release/Newtonsoft.Json.xml
+/GoMan-Email-Parser/bin/Release/Newtonsoft.Json.dll
+/GoMan-Email-Parser/bin/Release/MimeKit.xml
+/GoMan-Email-Parser/bin/Release/MimeKit.dll
+/GoMan-Email-Parser/bin/Release/MailKit.xml
+/GoMan-Email-Parser/bin/Release/MailKit.dll
+/GoMan-Email-Parser/bin/Release/ListViewPrinter.dll
+/GoMan-Email-Parser/bin/Release/GoMan.dll
+/GoMan-Email-Parser/bin/Release/BouncyCastle.Crypto.dll

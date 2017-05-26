@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MailKit;
 using MailKit.Net.Imap;
 using MailKit.Search;
+using MimeKit;
 
 namespace GoMan.Imap
 {
@@ -36,24 +37,36 @@ namespace GoMan.Imap
             {
                 try
                 {
-                    var message = await Client.Inbox.GetMessageAsync(uid);
-                    if (message.HtmlBody == null) continue;
-                    var matches = _reg.Matches(message.HtmlBody);
-                    if (matches.Count == 0) continue;
-                    var url = matches[0].Value;
+                    await Client.Inbox.GetMessageAsync(uid).ContinueWith(msg =>
+                    {
+                        if (msg.IsFaulted || msg.IsCanceled) return;
+  
+                        if (msg.Result.HtmlBody == null) return;
+                        var matches = _reg.Matches(msg.Result.HtmlBody);
+                        if (matches.Count == 0) return;
+                        var url = matches[0].Value;
 
-                    var clickedUrls = url;
+                        var clickedUrls = url;
 
-                    var parsedUrlEventArgs = new ParsedUrlEventArgs(uid, clickedUrls, message.From.ToString(), message.To.ToString());
-                    OnLinksParsed(this, parsedUrlEventArgs);
-                    await Task.Delay(600);
- 
+                        var parsedUrlEventArgs = new ParsedUrlEventArgs(uid, clickedUrls, msg.Result.From.ToString(), msg.Result.To.ToString());
+                        OnLinksParsed(this, parsedUrlEventArgs);
+                        //await Task.Delay(600);
+
+
+                    });
+                    await Task.Delay(500);
+
                 }
                 catch (Exception ex)
                 {
-                    //if (ex.Message.Equals("The ImapClient is not authenticated."))
-                    //    await Client.AuthenticateAsync(EmailUrlParserConfiguration.GetCredential());
-                    Debug.WriteLine(ex.Message);
+                    if (!Client.IsConnected)
+                        await Client.ConnectAsync(EmailUrlParserConfiguration.GetUri())
+                            .ConfigureAwait(false);
+                    if (!Client.IsAuthenticated) 
+                           await Client.AuthenticateAsync(EmailUrlParserConfiguration.GetCredential());
+                    if (!Client.Inbox.IsOpen)
+                        await Client.Inbox.OpenAsync(FolderAccess.ReadWrite);
+
                 }
                 callback(false);
             }
