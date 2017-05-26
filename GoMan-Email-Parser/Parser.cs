@@ -123,17 +123,26 @@ namespace Email_Url_Parser
                     }
                     catch (Exception e)
                     {
-                        parsedUrl.AddLog(LoggerTypes.Exception, $"Marked Uid {parsedUrl.Uid} as seen", e);
+                        parsedUrl.AddLog(LoggerTypes.Exception, $"Failed to activate {parsedUrl.Uid}", e);
                     }
 
                     Interlocked.Increment(ref _activatedCount);
-                    await _worker.Client.Inbox.AddFlagsAsync(parsedUrl.Uid, MessageFlags.Seen, true);
-                    parsedUrl.AddLog(LoggerTypes.Debug, $"Marked Uid {parsedUrl.Uid} as seen");
+                    if (Settings.DeleteSuccessful)
+                    {
+                        await _worker.Client.Inbox.AddFlagsAsync(parsedUrl.Uid, MessageFlags.Deleted, true);
+                        parsedUrl.AddLog(LoggerTypes.Debug, $"Deleted Uid {parsedUrl.Uid}");
+                    }
+                    else
+                    {
+                        await _worker.Client.Inbox.AddFlagsAsync(parsedUrl.Uid, MessageFlags.Seen, true);
+                        parsedUrl.AddLog(LoggerTypes.Debug, $"Marked Uid {parsedUrl.Uid} as seen");
+                    }
+
                     parsedUrl.Proxy = null;
                 }
                 catch (Exception e)
                 {
-                    parsedUrl.AddLog(LoggerTypes.Exception, $"Marked Uid {parsedUrl.Uid} as seen", e);
+                    parsedUrl.AddLog(LoggerTypes.Exception, $"Failed to activate {parsedUrl.Uid}", e);
                 }
 
             }

@@ -39,7 +39,8 @@ namespace Email_Url_Parser.UI
                     Password = textBoxPassword.Text,
                     ServerHostName = textBoxImapHostName.Text,
                     Port = port,
-                    IsSsl = checkBoxSsl.Checked
+                    IsSsl = checkBoxSsl.Checked,
+                    DeleteSuccessful = checkBoxDeleteSuccessful.Checked
                 };
 
                 this.DialogResult = DialogResult.OK;

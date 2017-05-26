@@ -42,6 +42,7 @@ namespace Email_Url_Parser.UI
             this.textBoxUsername = new System.Windows.Forms.TextBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.checkBoxDeleteSuccessful = new System.Windows.Forms.CheckBox();
             this.groupBoxSettings.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,6 +66,7 @@ namespace Email_Url_Parser.UI
             // 
             // groupBoxSettings
             // 
+            this.groupBoxSettings.Controls.Add(this.checkBoxDeleteSuccessful);
             this.groupBoxSettings.Controls.Add(this.checkBoxSsl);
             this.groupBoxSettings.Controls.Add(this.textBoxPort);
             this.groupBoxSettings.Controls.Add(this.label1);
@@ -162,6 +164,18 @@ namespace Email_Url_Parser.UI
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // checkBoxDeleteSuccessful
+            // 
+            this.checkBoxDeleteSuccessful.AutoSize = true;
+            this.checkBoxDeleteSuccessful.Checked = true;
+            this.checkBoxDeleteSuccessful.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxDeleteSuccessful.Location = new System.Drawing.Point(61, 131);
+            this.checkBoxDeleteSuccessful.Name = "checkBoxDeleteSuccessful";
+            this.checkBoxDeleteSuccessful.Size = new System.Drawing.Size(166, 17);
+            this.checkBoxDeleteSuccessful.TabIndex = 22;
+            this.checkBoxDeleteSuccessful.Text = "Delete Successful Activated?";
+            this.checkBoxDeleteSuccessful.UseVisualStyleBackColor = true;
+            // 
             // AddEditForm
             // 
             this.AcceptButton = this.buttonSave;
@@ -196,5 +210,6 @@ namespace Email_Url_Parser.UI
         private Label label1;
         private TextBox textBoxImapHostName;
         private Label labelImapHostName;
+        private CheckBox checkBoxDeleteSuccessful;
     }
 }
