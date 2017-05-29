@@ -72,7 +72,7 @@ namespace GoMan.Imap
             }
 
             callback(true);
-            await Client.Inbox.CloseAsync(false);
+            await Client.Inbox.CloseAsync(true);
         }
 
         protected virtual void OnLinksParsed(object arg1, ParsedUrlEventArgs arg2)

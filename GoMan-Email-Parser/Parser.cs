@@ -107,8 +107,9 @@ namespace Email_Url_Parser
                 ActivateQueue.AddToQueue(parsedUrl, Callback);
                 ProxyHandlerSingleton.Instance.IncreaseFailCounter(parsedUrl.Proxy);
             }
-            else 
+            else
             {
+                var wasOpen = true;
                 try
                 {
                     try
@@ -119,7 +120,10 @@ namespace Email_Url_Parser
                         if (!_worker.Client.IsAuthenticated)
                             await _worker.Client.AuthenticateAsync(_worker.EmailUrlParserConfiguration.GetCredential());
                         if (!_worker.Client.Inbox.IsOpen)
+                        {
+                            wasOpen = false;
                             await _worker.Client.Inbox.OpenAsync(FolderAccess.ReadWrite);
+                        }
                     }
                     catch (Exception e)
                     {
@@ -131,10 +135,15 @@ namespace Email_Url_Parser
                     {
                         await _worker.Client.Inbox.AddFlagsAsync(parsedUrl.Uid, MessageFlags.Deleted, true);
                         parsedUrl.AddLog(LoggerTypes.Debug, $"Deleted Uid {parsedUrl.Uid}");
+                        if (!wasOpen)
+                        {
+                            await _worker.Client.Inbox.CloseAsync(true);
+                        }
                     }
                     else
                     {
                         await _worker.Client.Inbox.AddFlagsAsync(parsedUrl.Uid, MessageFlags.Seen, true);
+                        
                         parsedUrl.AddLog(LoggerTypes.Debug, $"Marked Uid {parsedUrl.Uid} as seen");
                     }
 
