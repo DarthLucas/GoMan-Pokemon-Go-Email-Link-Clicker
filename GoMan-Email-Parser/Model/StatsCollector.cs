@@ -5,6 +5,7 @@ namespace Email_Url_Parser.Model
 {
     public class StatsCollector
     {
+        public static int Maxthreads {get;set;} = 30;
         private static int _pendingCount;
         public static int PendingCount => _pendingCount;
 

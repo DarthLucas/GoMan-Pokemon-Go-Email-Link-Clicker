@@ -27,7 +27,7 @@ namespace GoMan.Imap
         public async Task Dowork(Action<bool> callback)
         {
             await Client.Inbox.OpenAsync(FolderAccess.ReadWrite);
-            var query = SearchQuery.SubjectContains("Trainer Club Activation").Or(SearchQuery.SubjectContains("Your account needs to be re-activated"));
+            var query = SearchQuery.NotSeen.And(SearchQuery.SubjectContains("Trainer Club Activation").Or(SearchQuery.SubjectContains("Your account needs to be re-activated")));
             var uids = await Client.Inbox.SearchAsync(query);
             TotalUids = uids.Count;
 
@@ -50,8 +50,6 @@ namespace GoMan.Imap
 
                         var parsedUrlEventArgs = new ParsedUrlEventArgs(uid, clickedUrls, msg.Result.From.ToString(), msg.Result.To.ToString());
                         OnLinksParsed(this, parsedUrlEventArgs);
-                        //await Task.Delay(600);
-
 
                     });
                     await Task.Delay(500);

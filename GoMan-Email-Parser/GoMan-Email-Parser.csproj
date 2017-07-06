@@ -79,9 +79,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActivateQueue.cs" />
+    <Compile Include="ListParser.cs" />
     <Compile Include="Model\StatsCollector.cs" />
     <Compile Include="Model\LogModel.cs" />
     <Compile Include="Model\ParsedUrl.cs" />
+    <Compile Include="Model\UserAgent.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="UI\AddEditForm.cs">
       <SubType>Form</SubType>

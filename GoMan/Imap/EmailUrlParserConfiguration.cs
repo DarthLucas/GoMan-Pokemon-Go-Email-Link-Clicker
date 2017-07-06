@@ -10,7 +10,8 @@ namespace GoMan.Imap
         public bool IsSsl { get; set; }
         public string ServerHostName { get; set; }
         public int Port { get; set; }
-        public bool DeleteSuccessful { get; set; }
+        public bool IsPath { get; set; }
+        public string Path { get; set; }
 
         public EmailUrlParserConfiguration(string username, string password, bool isSsl, string serverHostName, int? port)
         {

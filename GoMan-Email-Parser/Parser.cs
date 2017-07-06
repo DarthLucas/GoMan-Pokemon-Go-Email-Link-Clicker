@@ -15,12 +15,13 @@ namespace Email_Url_Parser
         public EmailUrlParserConfiguration Settings { get; set; }
         private EmailUrlParser _worker;
         public HashSet<ParsedUrl> ParsedUrls { get; set; }
-        private int _activatedCount = 0;
-        private int _processedCount = 0;
+        protected int _activatedCount = 0;
+        protected int _processedCount = 0;
         public int ActivatedCount => _activatedCount;
 
         public event Action<object, ParsedUrl> ParsedLinkEvent;
         public event Action<object, string> ImapEvent;
+
 
 
         public Parser()
@@ -28,7 +29,7 @@ namespace Email_Url_Parser
             ParsedUrls = new HashSet<ParsedUrl>();
         }
 
-        public async void Start()
+        public virtual async void Start()
         {
 
             if (_worker == null)
@@ -131,21 +132,11 @@ namespace Email_Url_Parser
                     }
 
                     Interlocked.Increment(ref _activatedCount);
-                    if (Settings.DeleteSuccessful)
-                    {
-                        await _worker.Client.Inbox.AddFlagsAsync(parsedUrl.Uid, MessageFlags.Deleted, true);
-                        parsedUrl.AddLog(LoggerTypes.Debug, $"Deleted Uid {parsedUrl.Uid}");
-                        if (!wasOpen)
-                        {
-                            await _worker.Client.Inbox.CloseAsync(true);
-                        }
-                    }
-                    else
-                    {
-                        await _worker.Client.Inbox.AddFlagsAsync(parsedUrl.Uid, MessageFlags.Seen, true);
+
+                    await _worker.Client.Inbox.AddFlagsAsync((UniqueId)parsedUrl.Uid, MessageFlags.Seen, true);
                         
-                        parsedUrl.AddLog(LoggerTypes.Debug, $"Marked Uid {parsedUrl.Uid} as seen");
-                    }
+                    parsedUrl.AddLog(LoggerTypes.Debug, $"Marked Uid {parsedUrl.Uid} as seen");
+                    
 
                     parsedUrl.Proxy = null;
                 }

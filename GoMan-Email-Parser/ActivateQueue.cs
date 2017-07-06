@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
@@ -19,8 +16,8 @@ namespace Email_Url_Parser
         private static readonly AutoResetEvent QueueNotifier = new AutoResetEvent(false);
         private static readonly AutoResetEvent QueueNotifier1 = new AutoResetEvent(false);
         private static int _queueCounter;
-        private static readonly System.Timers.Timer Timer = new System.Timers.Timer(200);
-
+        private static readonly System.Timers.Timer Timer = new System.Timers.Timer(1);
+        private static readonly Random Rand = new Random();
         static ActivateQueue()
         {
             Timer.Elapsed += Timer_tick;
@@ -29,7 +26,7 @@ namespace Email_Url_Parser
         }
         private static void Timer_tick(object sender, ElapsedEventArgs e)
         {
-            if (_queueCounter < 100)
+            if (_queueCounter < StatsCollector.Maxthreads)
                 QueueNotifier1.Set();
         }
 
@@ -42,10 +39,10 @@ namespace Email_Url_Parser
                     QueueNotifier.WaitOne();
                     while (!Items.IsEmpty)
                     {
-                        if (_queueCounter >= 100) QueueNotifier1.WaitOne();
+                        if (_queueCounter >= StatsCollector.Maxthreads) QueueNotifier1.WaitOne();
                         Task task;
                         if (!Items.TryDequeue(out task)) continue;
-
+                        Interlocked.Increment(ref _queueCounter);
                         task.Start();
                     }
                 }
@@ -73,10 +70,13 @@ namespace Email_Url_Parser
                 }
                 parsedUrl.Status = StatusType.Activating;
                 parsedUrl.Proxy = proxy;
-                using (var webClient = new WebClient())
+                using (var webClient = new MyWebClient())
                 {
                     if (!proxy.Address.Equals("127.0.0.1"))
                         webClient.Proxy = proxy.AsWebProxy();
+                    webClient.Headers.Add("Upgrade-Insecure-Requests", "1");
+ 
+                    webClient.Headers.Add("User-Agent", UserAgent.GenerateUserAgent());
 
                     webClient.DownloadString(parsedUrl.Url);
                 }
@@ -93,9 +93,22 @@ namespace Email_Url_Parser
             }
             finally
             {
+                Interlocked.Decrement(ref _queueCounter);
                 callback(parsedUrl);
             }
 
+        }
+    }
+    class MyWebClient : WebClient
+    {
+        protected override WebRequest GetWebRequest(Uri address)
+        {
+            WebRequest request = base.GetWebRequest(address);
+            if (request is HttpWebRequest)
+            {
+                (request as HttpWebRequest).KeepAlive = false;
+            }
+            return request;
         }
     }
 }

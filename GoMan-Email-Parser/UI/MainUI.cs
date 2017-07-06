@@ -284,9 +284,9 @@ namespace Email_Url_Parser.UI
                     e.SubItem.ForeColor = Color.Red;
                 }
             }
-            else if (e.Column == olvColumnGoodProxy)
+            else if (e.Column == olvColumnStatu)
             {
-                e.SubItem.ForeColor = proxy.GoodProxy ? Color.Green : Color.Red;
+                e.SubItem.ForeColor = proxy.GetStatusColor();
             }
         }
 
@@ -388,7 +388,10 @@ namespace Email_Url_Parser.UI
         private void AddParser(EmailUrlParserConfiguration settings)
         {
             if (_parsers.ContainsKey(settings)) return;
-            var parser = new Parser() {Settings = settings};
+            Parser parser;
+
+            parser = settings.IsPath ? new ListParser() {Settings = settings} : new Parser() { Settings = settings };
+
             parser.ImapEvent += ParserOnImapEvent;
             _parsers.Add(settings, parser);
             var newNode = new TreeNode(settings.Username) { Tag = settings , Name = settings.Username};
@@ -540,6 +543,11 @@ namespace Email_Url_Parser.UI
         private void toolStripStatusLabelDiscord_Click(object sender, EventArgs e)
         {
             Process.Start("https://discord.gg/2ZBB53e");
+        }
+
+        private void numericUpDownMaxthreads_ValueChanged(object sender, EventArgs e)
+        {
+            StatsCollector.Maxthreads = (int) numericUpDownMaxthreads.Value;
         }
     }
 }

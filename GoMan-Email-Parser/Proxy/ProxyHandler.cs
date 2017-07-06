@@ -88,7 +88,7 @@ namespace Email_Url_Parser.Proxy
         {
             if (proxy.Address.Equals("127.0.0.1"))
             {
-                proxy.GoodProxy = true;
+                proxy.Status = GoProxy.ProxyStatus.Good;
                 return;
             }
 
@@ -97,13 +97,13 @@ namespace Email_Url_Parser.Proxy
                 using (var webClient = new WebClient())
                 {
                     webClient.Proxy = proxy.AsWebProxy();
-                   await webClient.DownloadStringTaskAsync("https://club.pokemon.com/us/pokemon-trainer-club/");
+                   await webClient.DownloadStringTaskAsync("https://club.pokemon.com/us/pokemon-trainer-club/sign-up/");
                 }
-                proxy.GoodProxy = true;
+                proxy.Status = GoProxy.ProxyStatus.Good;
             }
             catch (Exception e)
             {
-                proxy.GoodProxy = false;
+                proxy.Status = GoProxy.ProxyStatus.Banned;
             }
 
 
@@ -140,7 +140,7 @@ namespace Email_Url_Parser.Proxy
             {
 
                 availableProxies = Proxies.Where(x =>
-                            x.GoodProxy &&
+                            x.Status == GoProxy.ProxyStatus.Good &&
                             x.MaxConcurrentFails > x.CurrentConcurrentFails &&
                             x.MaxCreations > x.CurrentCreations &&
                             (!x.CoolDownTimer.IsRunning || x.CoolDownTimer.Elapsed.Minutes >= x.CoolDownMinutes)).ToList();

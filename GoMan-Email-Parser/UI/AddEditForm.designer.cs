@@ -42,14 +42,17 @@ namespace Email_Url_Parser.UI
             this.textBoxUsername = new System.Windows.Forms.TextBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.checkBoxDeleteSuccessful = new System.Windows.Forms.CheckBox();
+            this.checkBoxPath = new System.Windows.Forms.CheckBox();
+            this.textBoxPath = new System.Windows.Forms.TextBox();
+            this.labelPath = new System.Windows.Forms.Label();
+            this.buttonBrowse = new System.Windows.Forms.Button();
             this.groupBoxSettings.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelUsername
             // 
             this.labelUsername.AutoSize = true;
-            this.labelUsername.Location = new System.Drawing.Point(6, 22);
+            this.labelUsername.Location = new System.Drawing.Point(6, 80);
             this.labelUsername.Name = "labelUsername";
             this.labelUsername.Size = new System.Drawing.Size(58, 13);
             this.labelUsername.TabIndex = 0;
@@ -58,7 +61,7 @@ namespace Email_Url_Parser.UI
             // labelPassword
             // 
             this.labelPassword.AutoSize = true;
-            this.labelPassword.Location = new System.Drawing.Point(6, 48);
+            this.labelPassword.Location = new System.Drawing.Point(6, 106);
             this.labelPassword.Name = "labelPassword";
             this.labelPassword.Size = new System.Drawing.Size(56, 13);
             this.labelPassword.TabIndex = 1;
@@ -66,7 +69,10 @@ namespace Email_Url_Parser.UI
             // 
             // groupBoxSettings
             // 
-            this.groupBoxSettings.Controls.Add(this.checkBoxDeleteSuccessful);
+            this.groupBoxSettings.Controls.Add(this.buttonBrowse);
+            this.groupBoxSettings.Controls.Add(this.textBoxPath);
+            this.groupBoxSettings.Controls.Add(this.labelPath);
+            this.groupBoxSettings.Controls.Add(this.checkBoxPath);
             this.groupBoxSettings.Controls.Add(this.checkBoxSsl);
             this.groupBoxSettings.Controls.Add(this.textBoxPort);
             this.groupBoxSettings.Controls.Add(this.label1);
@@ -78,7 +84,7 @@ namespace Email_Url_Parser.UI
             this.groupBoxSettings.Controls.Add(this.labelPassword);
             this.groupBoxSettings.Location = new System.Drawing.Point(12, 9);
             this.groupBoxSettings.Name = "groupBoxSettings";
-            this.groupBoxSettings.Size = new System.Drawing.Size(402, 177);
+            this.groupBoxSettings.Size = new System.Drawing.Size(402, 215);
             this.groupBoxSettings.TabIndex = 4;
             this.groupBoxSettings.TabStop = false;
             this.groupBoxSettings.Text = "Settings";
@@ -88,7 +94,7 @@ namespace Email_Url_Parser.UI
             this.checkBoxSsl.AutoSize = true;
             this.checkBoxSsl.Checked = true;
             this.checkBoxSsl.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxSsl.Location = new System.Drawing.Point(9, 131);
+            this.checkBoxSsl.Location = new System.Drawing.Point(9, 189);
             this.checkBoxSsl.Name = "checkBoxSsl";
             this.checkBoxSsl.Size = new System.Drawing.Size(46, 17);
             this.checkBoxSsl.TabIndex = 21;
@@ -97,7 +103,7 @@ namespace Email_Url_Parser.UI
             // 
             // textBoxPort
             // 
-            this.textBoxPort.Location = new System.Drawing.Point(109, 97);
+            this.textBoxPort.Location = new System.Drawing.Point(109, 155);
             this.textBoxPort.Name = "textBoxPort";
             this.textBoxPort.Size = new System.Drawing.Size(287, 20);
             this.textBoxPort.TabIndex = 19;
@@ -106,7 +112,7 @@ namespace Email_Url_Parser.UI
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 100);
+            this.label1.Location = new System.Drawing.Point(6, 158);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 13);
             this.label1.TabIndex = 20;
@@ -114,7 +120,7 @@ namespace Email_Url_Parser.UI
             // 
             // textBoxImapHostName
             // 
-            this.textBoxImapHostName.Location = new System.Drawing.Point(109, 71);
+            this.textBoxImapHostName.Location = new System.Drawing.Point(109, 129);
             this.textBoxImapHostName.Name = "textBoxImapHostName";
             this.textBoxImapHostName.Size = new System.Drawing.Size(287, 20);
             this.textBoxImapHostName.TabIndex = 17;
@@ -123,7 +129,7 @@ namespace Email_Url_Parser.UI
             // labelImapHostName
             // 
             this.labelImapHostName.AutoSize = true;
-            this.labelImapHostName.Location = new System.Drawing.Point(6, 74);
+            this.labelImapHostName.Location = new System.Drawing.Point(6, 132);
             this.labelImapHostName.Name = "labelImapHostName";
             this.labelImapHostName.Size = new System.Drawing.Size(89, 13);
             this.labelImapHostName.TabIndex = 18;
@@ -131,21 +137,21 @@ namespace Email_Url_Parser.UI
             // 
             // textBoxPassword
             // 
-            this.textBoxPassword.Location = new System.Drawing.Point(109, 45);
+            this.textBoxPassword.Location = new System.Drawing.Point(109, 103);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(287, 20);
             this.textBoxPassword.TabIndex = 1;
             // 
             // textBoxUsername
             // 
-            this.textBoxUsername.Location = new System.Drawing.Point(109, 19);
+            this.textBoxUsername.Location = new System.Drawing.Point(109, 77);
             this.textBoxUsername.Name = "textBoxUsername";
             this.textBoxUsername.Size = new System.Drawing.Size(287, 20);
             this.textBoxUsername.TabIndex = 0;
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(333, 192);
+            this.buttonSave.Location = new System.Drawing.Point(338, 233);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 7;
@@ -156,7 +162,7 @@ namespace Email_Url_Parser.UI
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(252, 192);
+            this.buttonCancel.Location = new System.Drawing.Point(257, 233);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 6;
@@ -164,17 +170,44 @@ namespace Email_Url_Parser.UI
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // checkBoxDeleteSuccessful
+            // checkBoxPath
             // 
-            this.checkBoxDeleteSuccessful.AutoSize = true;
-            this.checkBoxDeleteSuccessful.Checked = true;
-            this.checkBoxDeleteSuccessful.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxDeleteSuccessful.Location = new System.Drawing.Point(61, 131);
-            this.checkBoxDeleteSuccessful.Name = "checkBoxDeleteSuccessful";
-            this.checkBoxDeleteSuccessful.Size = new System.Drawing.Size(166, 17);
-            this.checkBoxDeleteSuccessful.TabIndex = 22;
-            this.checkBoxDeleteSuccessful.Text = "Delete Successful Activated?";
-            this.checkBoxDeleteSuccessful.UseVisualStyleBackColor = true;
+            this.checkBoxPath.AutoSize = true;
+            this.checkBoxPath.Location = new System.Drawing.Point(9, 19);
+            this.checkBoxPath.Name = "checkBoxPath";
+            this.checkBoxPath.Size = new System.Drawing.Size(81, 17);
+            this.checkBoxPath.TabIndex = 22;
+            this.checkBoxPath.Text = "List of Urls?";
+            this.checkBoxPath.UseVisualStyleBackColor = true;
+            this.checkBoxPath.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // textBoxPath
+            // 
+            this.textBoxPath.Enabled = false;
+            this.textBoxPath.Location = new System.Drawing.Point(109, 51);
+            this.textBoxPath.Name = "textBoxPath";
+            this.textBoxPath.Size = new System.Drawing.Size(220, 20);
+            this.textBoxPath.TabIndex = 23;
+            // 
+            // labelPath
+            // 
+            this.labelPath.AutoSize = true;
+            this.labelPath.Location = new System.Drawing.Point(6, 54);
+            this.labelPath.Name = "labelPath";
+            this.labelPath.Size = new System.Drawing.Size(32, 13);
+            this.labelPath.TabIndex = 24;
+            this.labelPath.Text = "Path:";
+            // 
+            // buttonBrowse
+            // 
+            this.buttonBrowse.Enabled = false;
+            this.buttonBrowse.Location = new System.Drawing.Point(335, 49);
+            this.buttonBrowse.Name = "buttonBrowse";
+            this.buttonBrowse.Size = new System.Drawing.Size(61, 23);
+            this.buttonBrowse.TabIndex = 8;
+            this.buttonBrowse.Text = "...";
+            this.buttonBrowse.UseVisualStyleBackColor = true;
+            this.buttonBrowse.Click += new System.EventHandler(this.buttonBrowse_Click);
             // 
             // AddEditForm
             // 
@@ -182,7 +215,7 @@ namespace Email_Url_Parser.UI
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(426, 221);
+            this.ClientSize = new System.Drawing.Size(426, 266);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.groupBoxSettings);
@@ -210,6 +243,9 @@ namespace Email_Url_Parser.UI
         private Label label1;
         private TextBox textBoxImapHostName;
         private Label labelImapHostName;
-        private CheckBox checkBoxDeleteSuccessful;
+        private Button buttonBrowse;
+        private TextBox textBoxPath;
+        private Label labelPath;
+        private CheckBox checkBoxPath;
     }
 }

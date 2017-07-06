@@ -34,7 +34,7 @@ namespace Email_Url_Parser.UI
             this.components = new System.ComponentModel.Container();
             this.fastObjectListViewProxies = new BrightIdeasSoftware.FastObjectListView();
             this.olvColumnProxyIP = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumnGoodProxy = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumnStatu = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnProxyPort = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnProxyAuth = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnTimeOut = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -81,12 +81,14 @@ namespace Email_Url_Parser.UI
             this.failedLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip2 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelDiscord = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelDonate = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelAccountCreator = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelCheapProxy = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelDonate = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelAccountCreator = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelCheapProxy = new System.Windows.Forms.ToolStripStatusLabel();
+            this.numericUpDownMaxthreads = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fastObjectListViewProxies)).BeginInit();
             this.contextMenuStripProxy.SuspendLayout();
             this.panelListview.SuspendLayout();
@@ -100,12 +102,13 @@ namespace Email_Url_Parser.UI
             this.tableLayoutPanelMain.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.statusStrip2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaxthreads)).BeginInit();
             this.SuspendLayout();
             // 
             // fastObjectListViewProxies
             // 
             this.fastObjectListViewProxies.AllColumns.Add(this.olvColumnProxyIP);
-            this.fastObjectListViewProxies.AllColumns.Add(this.olvColumnGoodProxy);
+            this.fastObjectListViewProxies.AllColumns.Add(this.olvColumnStatu);
             this.fastObjectListViewProxies.AllColumns.Add(this.olvColumnProxyPort);
             this.fastObjectListViewProxies.AllColumns.Add(this.olvColumnProxyAuth);
             this.fastObjectListViewProxies.AllColumns.Add(this.olvColumnTimeOut);
@@ -115,7 +118,7 @@ namespace Email_Url_Parser.UI
             this.fastObjectListViewProxies.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(43)))), ((int)(((byte)(43)))));
             this.fastObjectListViewProxies.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumnProxyIP,
-            this.olvColumnGoodProxy,
+            this.olvColumnStatu,
             this.olvColumnProxyPort,
             this.olvColumnProxyAuth,
             this.olvColumnTimeOut,
@@ -146,12 +149,12 @@ namespace Email_Url_Parser.UI
             this.olvColumnProxyIP.Text = "Proxy";
             this.olvColumnProxyIP.Width = 124;
             // 
-            // olvColumnGoodProxy
+            // olvColumnStatu
             // 
-            this.olvColumnGoodProxy.AspectName = "GoodProxy";
-            this.olvColumnGoodProxy.CellPadding = null;
-            this.olvColumnGoodProxy.Text = "Good Proxy";
-            this.olvColumnGoodProxy.Width = 117;
+            this.olvColumnStatu.AspectName = "Status";
+            this.olvColumnStatu.CellPadding = null;
+            this.olvColumnStatu.Text = "Status";
+            this.olvColumnStatu.Width = 117;
             // 
             // olvColumnProxyPort
             // 
@@ -606,6 +609,13 @@ namespace Email_Url_Parser.UI
             this.toolStripStatusLabelDiscord.Text = "Discord";
             this.toolStripStatusLabelDiscord.Click += new System.EventHandler(this.toolStripStatusLabelDiscord_Click);
             // 
+            // toolStripStatusLabel6
+            // 
+            this.toolStripStatusLabel6.ForeColor = System.Drawing.Color.LightGray;
+            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
+            this.toolStripStatusLabel6.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel6.Text = "|";
+            // 
             // toolStripStatusLabelDonate
             // 
             this.toolStripStatusLabelDonate.IsLink = true;
@@ -615,6 +625,13 @@ namespace Email_Url_Parser.UI
             this.toolStripStatusLabelDonate.Tag = "";
             this.toolStripStatusLabelDonate.Text = "Donate";
             this.toolStripStatusLabelDonate.Click += new System.EventHandler(this.toolStripStatusLabelDonate_Click);
+            // 
+            // toolStripStatusLabel5
+            // 
+            this.toolStripStatusLabel5.ForeColor = System.Drawing.Color.LightGray;
+            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel5.Text = "|";
             // 
             // toolStripStatusLabelAccountCreator
             // 
@@ -626,6 +643,13 @@ namespace Email_Url_Parser.UI
             this.toolStripStatusLabelAccountCreator.Text = "Account Creator";
             this.toolStripStatusLabelAccountCreator.Click += new System.EventHandler(this.toolStripStatusLabelAccountCreator_Click);
             // 
+            // toolStripStatusLabel4
+            // 
+            this.toolStripStatusLabel4.ForeColor = System.Drawing.Color.LightGray;
+            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+            this.toolStripStatusLabel4.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel4.Text = "|";
+            // 
             // toolStripStatusLabelCheapProxy
             // 
             this.toolStripStatusLabelCheapProxy.IsLink = true;
@@ -636,26 +660,33 @@ namespace Email_Url_Parser.UI
             this.toolStripStatusLabelCheapProxy.Text = "Pokemon Go Proxy";
             this.toolStripStatusLabelCheapProxy.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
             // 
-            // toolStripStatusLabel4
+            // numericUpDownMaxthreads
             // 
-            this.toolStripStatusLabel4.ForeColor = System.Drawing.Color.LightGray;
-            this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-            this.toolStripStatusLabel4.Size = new System.Drawing.Size(10, 17);
-            this.toolStripStatusLabel4.Text = "|";
+            this.numericUpDownMaxthreads.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericUpDownMaxthreads.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(43)))), ((int)(((byte)(43)))));
+            this.numericUpDownMaxthreads.ForeColor = System.Drawing.Color.LightGray;
+            this.numericUpDownMaxthreads.Location = new System.Drawing.Point(1193, 1);
+            this.numericUpDownMaxthreads.Name = "numericUpDownMaxthreads";
+            this.numericUpDownMaxthreads.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDownMaxthreads.TabIndex = 12;
+            this.numericUpDownMaxthreads.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.numericUpDownMaxthreads.ValueChanged += new System.EventHandler(this.numericUpDownMaxthreads_ValueChanged);
             // 
-            // toolStripStatusLabel5
+            // label1
             // 
-            this.toolStripStatusLabel5.ForeColor = System.Drawing.Color.LightGray;
-            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
-            this.toolStripStatusLabel5.Size = new System.Drawing.Size(10, 17);
-            this.toolStripStatusLabel5.Text = "|";
-            // 
-            // toolStripStatusLabel6
-            // 
-            this.toolStripStatusLabel6.ForeColor = System.Drawing.Color.LightGray;
-            this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
-            this.toolStripStatusLabel6.Size = new System.Drawing.Size(10, 17);
-            this.toolStripStatusLabel6.Text = "|";
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(43)))), ((int)(((byte)(43)))));
+            this.label1.ForeColor = System.Drawing.Color.LightGray;
+            this.label1.Location = new System.Drawing.Point(1115, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(72, 13);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Max Threads:";
             // 
             // MainUi
             // 
@@ -663,6 +694,8 @@ namespace Email_Url_Parser.UI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1313, 484);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.numericUpDownMaxthreads);
             this.Controls.Add(this.statusStrip2);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tableLayoutPanelMain);
@@ -686,6 +719,7 @@ namespace Email_Url_Parser.UI
             this.statusStrip1.PerformLayout();
             this.statusStrip2.ResumeLayout(false);
             this.statusStrip2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaxthreads)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -726,7 +760,7 @@ namespace Email_Url_Parser.UI
         private OLVColumn olvColumnUsageCount;
         private OLVColumn olvColumnCurrentFails;
         private OLVColumn olvColumnTimeOut;
-        private OLVColumn olvColumnGoodProxy;
+        private OLVColumn olvColumnStatu;
         private Button buttonStartSelected;
         private Timer timerUrlRefresher;
         private OLVColumn olvColumnStatus;
@@ -747,5 +781,7 @@ namespace Email_Url_Parser.UI
         private ToolStripStatusLabel toolStripStatusLabel6;
         private ToolStripStatusLabel toolStripStatusLabel5;
         private ToolStripStatusLabel toolStripStatusLabel4;
+        private NumericUpDown numericUpDownMaxthreads;
+        private Label label1;
     }
 }
